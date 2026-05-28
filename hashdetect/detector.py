@@ -11,6 +11,16 @@ class Match:
     signature: HashSignature
     confidence: float
 
+    def to_dict(self) -> dict:
+        """Convert this match to a plain dict for JSON serialization."""
+        return {
+            "name": self.signature.name,
+            "confidence": round(self.confidence, 4),
+            "length": self.signature.length,
+            "hashcat_mode": self.signature.hashcat_mode,
+            "john_format": self.signature.john_format,
+        }
+
 
 def detect(hash_string: str) -> list[Match]:
     """Identify the hash type(s) of the input string with confidence scores.
