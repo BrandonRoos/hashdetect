@@ -1,20 +1,47 @@
-"""Hash detection logic."""
+"""Hash detection logic with confidence scoring."""
+
+from dataclasses import dataclass
 
 from hashdetect.signatures import SIGNATURES, HashSignature
 
 
-def detect(hash_string: str) -> list[HashSignature]:
-    """Return all signatures whose pattern matches the input string.
+@dataclass
+class Match:
+    """A signature that matched the input, with its computed confidence."""
+    signature: HashSignature
+    confidence: float
+
+
+def detect(hash_string: str) -> list[Match]:
+    """Identify the hash type(s) of the input string with confidence scores.
 
     Args:
         hash_string: The candidate hash string to identify.
 
     Returns:
-        A list of HashSignature objects that match. Empty list if no match.
+        A list of Match objects, sorted by confidence descending.
+        Empty if nothing matched.
     """
     hash_string = hash_string.strip()
-    matches = []
-    for signature in SIGNATURES:
-        if signature.pattern.match(hash_string):
-            matches.append(signature)
+
+    matching_signatures = [
+        sig for sig in SIGNATURES if sig.pattern.match(hash_string)
+    ]
+
+    if not matching_signatures:
+        return []
+
+    total_prevalence = sum(sig.prevalence for sig in matching_signatures)
+
+    matches = [
+        Match(signature=sig, confidence=sig.prevalence / total_prevalence)
+        for sig in matching_signatures
+    ]
+
+    matches.sort(key=lambda m: m.confidence, reverse=True)
+
     return matches
+
+    # for sig in SIGNATURES:
+    #     if sig.pattern.match(hash_string):
+    #         yield Match(signature=sig, confidence=sig.prevalence)

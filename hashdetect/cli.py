@@ -25,8 +25,17 @@ def main() -> int:
         return 1
 
     print(f"Possible matches for {args.hash}:")
-    for signature in matches:
-        print(f"  - {signature.name} (length {signature.length})")
+    for match in matches:
+        sig = match.signature
+        confidence_pct = round(match.confidence * 100)
+        hashcat = f"hashcat {sig.hashcat_mode}" if sig.hashcat_mode is not None else "hashcat n/a"
+        john = f"john {sig.john_format}" if sig.john_format is not None else "john n/a"
+        print(
+            f"  - {sig.name:<8} "
+            f"(confidence {confidence_pct}%, "
+            f"length {sig.length}, "
+            f"{hashcat}, {john})"
+        )
     return 0
 
 

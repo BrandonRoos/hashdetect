@@ -22,7 +22,7 @@ SIGNATURES = [
         pattern=re.compile(r"^[a-fA-F0-9]{32}$"),
         prevalence=0.9,
         hashcat_mode=0,
-        john_format="md5",
+        john_format="raw-md5",
     ),
     HashSignature(
         name="SHA-1",
@@ -71,6 +71,22 @@ SIGNATURES = [
         prevalence=0.5,
         hashcat_mode=3200,
         john_format="bcrypt",
+    ),
+    HashSignature(
+        name="NTLM",
+        length=32,
+        pattern=re.compile(r"^[a-fA-F0-9]{32}$"),
+        prevalence=0.45,
+        hashcat_mode=1000,
+        john_format="nt",
+    ),
+    HashSignature(
+        name="MD4",
+        length=32,
+        pattern=re.compile(r"^[a-fA-F0-9]{32}$"),
+        prevalence=0.15,
+        hashcat_mode=900,
+        john_format="raw-md4",
     ),
 ]
 # hashcat - m 0 hashes.txt rockyou.txt        # mode 0 = MD5
