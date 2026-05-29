@@ -95,4 +95,3 @@ SIGNATURES = [
 # hashcat - m 3200 hashes.txt rockyou.txt     # mode 3200 = bcrypt
 
 # john --format=raw-md5 hashes.txt
-# think of kali and cyber security club we used this in class to crack hashes. john --format=raw-sha1 hashes.txt
