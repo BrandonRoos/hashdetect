@@ -74,3 +74,5 @@ actually matters, move on._
 - The debug loop is always the same: error → read the message → fix → re-run.
 - Modular structure (data / logic / interface in separate files) meant adding
   new features rarely touched unrelated code.
+
+<!-- testing branch protection -->
