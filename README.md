@@ -2,7 +2,7 @@
 
 # 🔎 hashdetect
 
-### Hash Identification CLI · Security-Gated CI/CD Pipeline
+### Hash Identification CLI · CI/CD Security Gate Pipeline
 
 A Python command-line tool that identifies likely hash types by length and structure — wrapped in a GitHub Actions pipeline where four security gates block the merge on real findings.
 
@@ -251,6 +251,8 @@ The gates were added one at a time, each verified green before the next went in.
 | 2 | Dependency scan | `pip-audit` | `requirements.txt` | Any known-vulnerable pinned dependency |
 | 3 | Secret scan | `gitleaks/gitleaks-action@v2` | Full git history (`fetch-depth: 0`) | Any detected secret |
 | 4 | Image scan | `aquasecurity/trivy-action@v0.36.0` | `hashdetect:ci` container image | `CRITICAL,HIGH` findings, `exit-code: 1` |
+
+All four checks — `SAST - Semgrep`, `Dependency Scan - pip-audit`, `Secret Scan - Gitleaks`, and `Image Scan - Trivy` — are configured as required status checks under GitHub branch protection on `main`, so a pull request cannot be merged until every one of them passes. I verified this with a test PR: the merge button stayed disabled while the checks were pending. That rule is what makes "blocks the merge" literal rather than just "the check goes red."
 
 <a id="four-gates"></a>
 
