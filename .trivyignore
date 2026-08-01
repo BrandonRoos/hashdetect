@@ -1,0 +1,16 @@
+# Unfixed upstream Debian/Perl CVEs in python:3.12-slim base image (debian 13.6)
+# Reviewed 2026-08-01: confirmed no Fixed Version available via Trivy's own output.
+# Re-check on next base image rebuild / before production use.
+
+CVE-2026-53615
+CVE-2026-41992
+CVE-2026-54369
+CVE-2025-69720
+CVE-2026-13221
+CVE-2026-42496
+CVE-2026-57433
+CVE-2026-8376
+CVE-2026-42497
+CVE-2026-48962
+CVE-2026-57432
+CVE-2026-9538
