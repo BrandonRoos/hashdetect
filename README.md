@@ -4,8 +4,7 @@
 
 ### Hash Identification CLI · CI/CD Security Gate Pipeline
 
-A Python command-line tool that identifies likely hash types by length and structure — wrapped in a GitHub Actions pipeline where four security gates block the merge on real findings.
-
+Python CLI that fingerprints hash types by length, charset, and structure — hardened by a GitHub Actions pipeline with four merge-blocking security gates (Semgrep SAST, pip-audit SCA, Gitleaks secret scanning, Trivy image scanning) and a documented CVE risk-acceptance policy.
 <br>
 
 ![Python](https://img.shields.io/badge/Python_3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)
